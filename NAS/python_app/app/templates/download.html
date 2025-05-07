@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS - Download Files</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Navigation sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>NAS Storage</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/upload">Upload Files</a></li>
+                <li class="active"><a href="/download">Download Files</a></li>
+                <li class="logout"><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main content area -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Download Files</h1>
+            </header>
+            
+            <div class="content-section">
+                {% if error %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endif %}
+                
+                <div class="files-table-container">
+                    <table class="files-table">
+                        <thead>
+                            <tr>
+                                <th>Filename</th>
+                                <th>Size</th>
+                                <th>Upload Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if files %}
+                                {% for file in files %}
+                                <tr>
+                                    <td>{{ file.filename }}</td>
+                                    <td>{{ (file.size / 1024) | round(2) }} KB</td>
+                                    <td>{{ file.upload_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td>
+                                        <a href="/download/{{ file.id }}" class="btn btn-small">Download</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="no-files">No files found</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="instructions">
+                    <h3>Download Instructions</h3>
+                    <ul>
+                        <li>Click the "Download" button next to the file you want to download</li>
+                        <li>Files will be downloaded directly to your device</li>
+                        <li>Upload new files from the "Upload Files" section</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <footer class="page-footer">
+                <p>NAS Web Interface - Prototype</p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Navigation sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>NAS Storage</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/upload">Upload Files</a></li>
+                <li><a href="/download">Download Files</a></li>
+                <li class="logout"><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main content area -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    Welcome, {{ username }}
+                </div>
+            </header>
+            
+            <div class="dashboard-grid">
+                <!-- Storage overview card -->
+                <div class="dashboard-card storage-overview">
+                    <h2>Storage Overview</h2>
+                    <div class="storage-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">{{ storage_info.total_files }}</span>
+                            <span class="stat-label">Files</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">{{ storage_info.total_size_mb }} MB</span>
+                            <span class="stat-label">Used</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">{{ storage_info.free_space_mb }} MB</span>
+                            <span class="stat-label">Free</span>
+                        </div>
+                    </div>
+                    
+                    <div class="storage-bar">
+                        <div class="storage-used" style="width: {{ storage_info.used_percent }}%;">
+                            {{ storage_info.used_percent }}%
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent files card -->
+                <div class="dashboard-card recent-files">
+                    <h2>Recent Files</h2>
+                    <div class="files-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Size</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files[:5] %}
+                                <tr>
+                                    <td>{{ file.filename }}</td>
+                                    <td>{{ (file.size / 1024) | round(2) }} KB</td>
+                                    <td>
+                                        <a href="/download/{{ file.id }}" class="btn btn-small">Download</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Activity card -->
+                <div class="dashboard-card activity">
+                    <h2>Recent Activity</h2>
+                    <ul class="activity-list">
+                        {% for activity in recent_activity %}
+                        <li>
+                            <span class="activity-action">{{ activity.action }}</span>
+                            <span class="activity-filename">{{ activity.filename }}</span>
+                            <span class="activity-time">{{ activity.time }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
+            <footer class="page-footer">
+                <p>NAS Web Interface - Prototype</p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,5 @@
+1) Use path: /mnt/sdb/<USER>/<File_name>/ *encrypted_chunks
+2) libraries used: 
+	i) FastAPI (uploading)
+	ii) aiofiles (chunking)
+	

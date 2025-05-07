@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS - Upload Files</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Navigation sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>NAS Storage</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li class="active"><a href="/upload">Upload Files</a></li>
+                <li><a href="/download">Download Files</a></li>
+                <li class="logout"><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main content area -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Upload Files</h1>
+            </header>
+            
+            <div class="content-section">
+                {% if success %}
+                <div class="success-message">
+                    File <strong>{{ filename }}</strong> uploaded successfully!
+                </div>
+                {% endif %}
+                
+                {% if error %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endif %}
+                
+                <div class="upload-card">
+                    <h2>Upload a new file</h2>
+                    <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+                        <div class="form-group">
+                            <label for="file">Select File</label>
+                            <input type="file" id="file" name="file" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Description (Optional)</label>
+                            <textarea id="description" name="description" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Upload File</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="upload-instructions">
+                    <h3>Upload Instructions</h3>
+                    <ul>
+                        <li>Maximum file size: 100MB</li>
+                        <li>Allowed file types: All files</li>
+                        <li>Files will be available in your dashboard after upload</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <footer class="page-footer">
+                <p>NAS Web Interface - Prototype</p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html> 

@@ -2,6 +2,8 @@
 
 This directory contains instructions for setting up a home server as a NAS (Network-Attached Storage).
 
+	(Use path: cd /mnt/sdb)
+
 **Note:**  
 - Work in progress.  
 - The goal is to create a web app for file uploads and downloads.  
