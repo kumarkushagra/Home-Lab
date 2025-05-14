@@ -1,18 +1,21 @@
 # Old Laptop → Home Server (Accessible via the Internet)
 
-Turning your old laptop into a home server is a smart way to reuse aging hardware or build a local development environment—without dropping cash on fancy equipment or third-party services.
+This guide contains steps on how to create a Home server accessable via the internet. 
+If you are using an old laptop for this project, i highly reccomend you install a linux distro. You will soon realize that the device was never slow, its just the `WINDOWS` that was consuming most of the resources. (if you are not sure about any distro, go with Ubuntu or Mint (similar to windows))
+ 
+devices that can be used: Old laptop, Raspberry pi, old tablets (install Linux based OS like Ubuntu Touch)
 
-But here's the catch: setting this up usually involves  
+Problems with creating a server (in this case, Home server): -
 1. Getting a **static IP**  
 2. **Port forwarding** on your router
 
 Both can be a pain. 
-Getting a static IP can cost more than it's worth for a home setup. And port forwarding opens the door (literally) to some serious security risks.
+Getting a static IP can cost more than it's worth for a home setup. And port forwarding opens the door (literally) to some serious security risks. 
 
-### 🚀 The Good News?
+### The Good News?
 
-You *don’t* need a static IP. You *don’t* need to mess with your router.  
-This guide shows you how to turn your laptop into a secure, internet-accessible home server **without** all that hassle.
+You *don’t* need a static IP. You *don’t* need to modify with your router.  
+This guide shows you how to turn your device into a secure, internet-accessible home server **without** all that hassle.
 
 We’ll use:
 - 🛡️ **Cloudflare Tunnel**
@@ -29,6 +32,17 @@ These tools securely expose your server to the internet—*without* punching hol
 > `Cloudflare Tunnel` creates a secure, outbound-only connection from your local server to Cloudflare’s global edge network. It uses a lightweight client (`cloudflared`) that runs on your machine and tunnels traffic through Cloudflare, hiding your server’s real IP and reducing exposure to direct attacks. Multiple instances of `cloudflared` can run for load balancing and failover, ensuring fast and reliable routing to the nearest Cloudflare data center.
 
 ---
+
+
+## Requirments
+1. Device
+   It could be an Old laptop, Old mobile phone, Raspberry pi  
+   `(Just install Linux based OS on it)`
+2. Internet access  
+   Wifi or GSM can be used here
+   `(Wifi will provide much more stable connection)`
+3. Domain Name (Optional)  
+   Using a domain would make things a lot easier. We can still complete this task without one, but the URL will keep changing after every system restart
 
 ## 🛠️ Steps
 
